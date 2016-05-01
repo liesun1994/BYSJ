@@ -14,13 +14,12 @@ Ext.define('BYSJ.view.Car.List', {
             xtype: "pagingtoolbar",
            displayInfo: true, store: me.store,
 	        items: [
-	           	{ iconCls: "add", scope: me, text: '增加车辆信息', id: "buttonUserAdd" },
-	            { iconCls: "edit", scope: me, text: '修改车辆信息', id: "buttonUserEdit", disabled: true },
-	            { iconCls: "delete", scope: me, text: '删除车辆信息', id: "buttonUserDelete", disabled: true },
+	           	{ iconCls: "add", scope: me, text: '增加车辆信息', id: "buttonCarAdd" },
+	            { iconCls: "edit", scope: me, text: '修改车辆信息', id: "buttonCarEdit", disabled: true },
+	            { iconCls: "delete", scope: me, text: '删除车辆信息', id: "buttonCarDelete", disabled: true },
 	        ]
         }
         me.columns=[
-            //	{header:'用户名',dataIndex:'username',hidden:true},
                { text: '编号', dataIndex: 'car_id' },
                 { text: '车牌号', dataIndex: 'car_num',width: 140 },
                 { text: '车主姓名', dataIndex: 'owner_name', width: 120 },

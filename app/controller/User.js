@@ -14,10 +14,7 @@ Ext.define('BYSJ.controller.User', {
         { ref: "WorkPanel", selector: "#workPanel" },
         //{ ref: "UserView", selector: "#usersView" },
     	{ ref: "ButtonUserAdd", selector: "#buttonUserAdd" },
-        { ref: "ButtonUserEdit", selector: "#buttonUserEdit" },
-        /*
-        { ref: "ButtonUserDelete", selector: "#buttonDelete" }*/
-    // { ref: "ChangepasswordView", selector: "#changepasswordView" }
+        { ref: "ButtonUserEdit", selector: "#buttonUserEdit" }
     ],
 
     init: function () {
@@ -27,11 +24,6 @@ Ext.define('BYSJ.controller.User', {
         panel.add(me.view);
         me.getButtonUserAdd().on("click", me.onAddUser, me);
         me.getButtonUserEdit().on("click",me.onEditUser,me);
-        /*me.getUserView().on("edit", me.onEditcomplete, me);
-        me.getUserView().on("canceledit", me.onCancelEdit, me);
-        me.getUserView().on("beforeedit", me.onBeforeEdit, me);
-        me.getButtonUserDelete().on("click", me.onDeleteUser, me);
-        me.getButtonUserResetPassword().on("click", me.onResetPassword, me);*/
         me.control({
         });
     },
