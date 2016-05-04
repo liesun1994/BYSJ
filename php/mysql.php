@@ -14,20 +14,20 @@ function DBClose(){
 function getUserById($id){
 	DBOpen();
 	$sql="select user_id,user_name,user_realname,user_tel,location,user_tips from user_info where user_id=".$id;
-	echo $sql;
 	$result=mysql_query($sql);
 	if(mysql_affected_rows()==1){
+		$rs=mysql_fetch_array($result);
 		$array=array(
 			'success'=>true,
 			'total'=>1,
 			'msg'=>'查找成功',
 			'data'=>array(
-				'user_id'=>$result["user_id"],
-				'user_name'=>$result["user_name"],
-				'user_realname'=>$result["user_realname"],
-				'user_tel'=>$result["user_tel"],
-				'location'=>$result["location"],
-				'user_tips'=>$result["user_tips"]
+				'user_id'=>$rs["user_id"],
+				'user_name'=>$rs["user_name"],
+				'user_realname'=>$rs["user_realname"],
+				'user_tel'=>$rs["user_tel"],
+				'location'=>$rs["location"],
+				'user_tips'=>$rs["user_tips"]
 			)
 		);
 		echo json_encode($array);
@@ -111,14 +111,14 @@ function addUser($user_name,$user_realname,$user_tel,$org_id,$user_tips){
 		echo json_encode($array);
 	}
 }
-function deleteUser($ids,$total){
+function deleteUser($user_id){
 	DBOpen();	
-	$sql="delete from USER_INFO where user_id in( "+$ids+" )";
+	$sql="delete from USER_INFO where user_id=".$user_id;
 	mysql_query($sql);
-	if(mysql_affected_rows()==$total){
+	if(mysql_affected_rows()==1){
 		$array=array(
 			'success'=>true,
-			'total'=>$total,
+			'total'=>1,
 			'msg'=>'删除成功',
 			'data'=>array()
 		);
@@ -133,14 +133,11 @@ function deleteUser($ids,$total){
 		echo json_encode($array);
 	}
 } 
-function updateUserpassword($id,$oldpwd,$newpwd){
+function updateUserpassword($user_name,$oldpwd,$newpwd){
 	DBOpen();
-	$opwd=md5($oldpwd);
-	$sql="select user_password from user_info where user_id=".$id;
-	$r=mysql_query($sql);
-	if(mysql_affected_rows()==1&&$r["user_password"]==$opwd){
-		$sql2="update user_info set user_password='".$pwd."' where user_id=";
-		mysql_query($sql2);
+	$sql="update user_info set user_password='".md5($newpwd)."' where user_name='".$user_name."' and user_password='".md5($oldpwd)."'";
+	//echo $sql;
+	mysql_query($sql);
 		if(mysql_affected_rows()==1){
 			$array=array(
 			'success'=>true,
@@ -158,15 +155,6 @@ function updateUserpassword($id,$oldpwd,$newpwd){
 			);
 			echo json_encode($array);
 		}
-	}else{
-		$array=array(
-			'success'=>false,
-			'total'=>0,
-			'msg'=>'原始密码出错',
-			'data'=>array()
-		);
-		echo json_encode($array);
-	}
 	DBClose();
 }
 function updateUserInfo($id,$user_realname,$user_tel,$user_tips){
@@ -191,8 +179,52 @@ function updateUserInfo($id,$user_realname,$user_tel,$user_tips){
 		echo json_encode($array);
 	}
 }
-
-
+function resetUserpwd($user_id){
+	DBOpen();
+	$pwd=md5('123456');
+	$sql="update user_info set user_password='".$pwd."' where user_id=".$user_id;
+	mysql_query($sql);
+	if(mysql_affected_rows()==1){
+		$array=array(
+			'success'=>true,
+			'total'=>1,
+			'msg'=>'重置密码成功',
+			'data'=>array()
+		);
+		echo json_encode($array);
+	}else{
+		$array=array(
+			'success'=>false,
+			'total'=>0,
+			'msg'=>'重置密码失败',
+			'data'=>array()
+		);
+		echo json_encode($array);
+	}
+}
+function userLogin($user_name,$user_password){
+	DBOpen();
+	$pwd=md5($user_password);
+	$sql="select * from user_info where user_name='".$user_name."' and user_password='".$pwd."'";
+	mysql_query($sql);
+	if(mysql_affected_rows()==1){
+		$array=array(
+			'success'=>true,
+			'total'=>1,
+			'msg'=>'登录成功',
+			'data'=>array()
+		);
+		echo json_encode($array);
+	}else{
+		$array=array(
+			'success'=>false,
+			'total'=>0,
+			'msg'=>'登录失败',
+			'data'=>array()
+		);
+		echo json_encode($array);
+	}
+}
 
 /*对emergency数据操作*/
 function getEmById($id){
@@ -327,21 +359,45 @@ function getEmUnhandleList($page,$limit){
 function addEmergency($token){
 	
 }
+
+function deleteEmergency($em_id){
+	DBOpen();
+	$sql="delete from emergency_info where emergency_id=".$em_id;
+	mysql_query($sql);
+	if(mysql_affected_rows()==1){
+		$array=array(
+			'success'=>true,
+			'total'=>1,
+			'msg'=>'删除成功',
+			'data'=>array()
+		);
+		echo json_encode($array);
+	}else{
+		$array=array(
+			'success'=>true,
+			'total'=>0,
+			'msg'=>'删除失败',
+			'data'=>array()
+		);
+		echo json_encode($array);
+	}
+}
 /*对car信息表的操作*/
-function getCar($car_id){
+function getCarById($car_id){
 	DBOpen();	
 	$sql="select car_id,car_num,owner_name,owner_tel from car_info where car_id=".$car_id;
 	$result=mysql_query($sql);
+	$rs=mysql_fetch_array($result);
 	if(mysql_affected_rows()==1){
 		$array=array(
 			'success'=>true,
 			'total'=>1,
 			'Msg'=>"查看成功",
 			'data'=>array(
-				'car_id'=>$result["car_id"],
-				'car_num'=>$result["car_num"],
-				'owner_name'=>$result["owner_name"],
-				'owner_tel'=>$result["owner_tel"]
+				'car_id'=>$rs["car_id"],
+				'car_num'=>$rs["car_num"],
+				'owner_name'=>$rs["owner_name"],
+				'owner_tel'=>$rs["owner_tel"]
 			)
 		);
 		echo json_encode($array);

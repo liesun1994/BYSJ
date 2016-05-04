@@ -33,5 +33,4 @@ echo json_decode($m);*/
 //getNEmById(0);
 //$array=getUserList(0, 20, 1);
 //echo $array;
-getEmList(0, 20);
-
+echo md5(123456);

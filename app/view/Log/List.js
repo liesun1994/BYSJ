@@ -16,7 +16,7 @@ Ext.define('BYSJ.view.Log.List', {
             xtype: "pagingtoolbar",
            displayInfo: true, store: me.store,
 	        items: [
-	            { iconCls: "delete", scope: me, text: '删除日志信息', id: "btnDelete", disabled: false },
+	            { iconCls: "delete", scope: me, text: '删除日志信息', id: "buttonLogDelete", disabled: true },
 	        ]
         }
         me.columns=[

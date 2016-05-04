@@ -16,8 +16,8 @@ Ext.define('BYSJ.view.User.List', {
            displayInfo: true, store: me.store,
 	        items: [
 	           	{ iconCls: "user_add", scope: me, text: '增加用户信息', id: "buttonUserAdd" },
-	            { iconCls: "user_edit", scope: me, text: '修改用户信息', id: "buttonUserEdit"},
-	            { iconCls: "user_delete", scope: me, text: '删除用户信息', id: "buttonUserDelete"},
+	            { iconCls: "user_edit", scope: me, text: '修改用户信息', id: "buttonUserEdit",disabled:true},
+	            { iconCls: "user_delete", scope: me, text: '删除用户信息', id: "buttonUserDelete",disabled:true},
 	        	{text:"重置密码",id:"buttonUserResetPassword",disabled:true}
 	        ]
         }

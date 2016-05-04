@@ -1,14 +1,14 @@
-Ext.Loader.setConfig(
-	{enabled:true}
-);
-Ext.application({
-    name: "BYSJ",
-    appFolder: 'app',
-    controllers: ["MainPanel"],
-    autoCreateViewport: true,
-    launch: function () {
-        // 页面加载完成之后执行
-        var login=Ext.create('Ext.window.Window',{
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<link rel="stylesheet" href="js/extjs/resources/css/ext-all.css" />
+		<script type="text/javascript" src="js/extjs/bootstrap.js" ></script>
+		<script type="text/javascript" src="js/extjs/ext-all.js" ></script>
+		<script type="text/javascript" src="js/extjs/ext-lang-zh_CN.js" ></script>
+		<script>
+			Ext.onReady(function(){
+				var login=Ext.create('Ext.window.Window',{
 					width:320,
 					height:160,
 					closable:false,
@@ -40,11 +40,12 @@ Ext.application({
 							                form.submit({
 							                    success: function(form, action) {
 							                    	var values=form.getValues();
-							                    	BYSJ.UserInfo={
+							                    	/*BYSJ.UserInfo={
 							                    		user_name:values['user_name']
-							                    	},
+							                    	},*/
+							                    	//session.setAttribute("user_name",form['user_name']);
 							                    	Ext.Msg.alert('信息提示','登录成功');
-							                    	login.close();
+							                       	window.location='index.html?user_name='+values['user_name'];
 							                    },
 							                    failure: function(form, action) {
 							                        Ext.Msg.alert('信息提示','登录失败');
@@ -61,6 +62,12 @@ Ext.application({
 					]
 				});
 				login.show();
-    }
-    
-});
+				
+			});
+		</script>
+		
+		<title>登录</title>
+	</head>
+	<body>
+	</body>
+</html>

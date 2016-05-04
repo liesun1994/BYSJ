@@ -12,7 +12,7 @@ Ext.define('BYSJ.controller.Log', {
     refs: [
         { ref: "WorkPanel", selector: "#workPanel" },
         { ref: "LogView", selector: "#loglistView" },
-        { ref: "ButtonDelete", selector: "#btnDelete" }
+        { ref: "ButtonLogDelete", selector: "#buttonLogDelete" }
     ],
 
     init: function () {
@@ -20,32 +20,24 @@ Ext.define('BYSJ.controller.Log', {
         panel = me.getWorkPanel();
         view = Ext.widget("loglistview");
         panel.add(view);
-        //addListener(refreshData,);
-        /*me.getLogView().on("selectionchange", me.onLogSelect, me);
-        me.getButtonDelete().on("click", me.onDelete, me);*/
+        me.getButtonLogDelete().on("click", me.onDelete, me);
+        Ext.getCmp("workPanel").down("gridpanel").on("selectionchange", me.onListSelect, me);
         me.control({
         });
     },
     
-    onLogSelect: function (model, rs) {
-        var me = this,
-        length = rs.length;
-        me.getButtonDelete().setDisabled(length == 0);
-    },
-    
     onDelete: function () {
-    	alert('123');
-        /*var me = this,
-            list = me.view.down("gridpanel"),
-            rs = list.getSelectionModel().getSelection();
+    	var me = this,
+        list = Ext.getCmp("workPanel").down("gridpanel"),
+        rs = list.getSelectionModel().getSelection();
         if (rs.length > 0) {
             Ext.Msg.confirm("删除内容", "是否确定删除选中的内容？", function (btn) {
                 if (btn == "yes") {
                     Ext.each(rs, function (item) {
                         Ext.Ajax.request({
-                            url: "../Document/Delete",
+                            url: "php/Log/deleteLog.php",
                             params: {
-                                documentid: item.data.log_id
+                                log_id: item.data.log_id
                             },
                             method: "POST",
                             async: false,
@@ -59,7 +51,12 @@ Ext.define('BYSJ.controller.Log', {
                     });
                 }
             }, list)
-        }*/
+        }
+    },
+    
+    onListSelect: function (model, sels) {
+        var me = this;
+        me.getButtonLogDelete().setDisabled(sels.length == 0);
     }
     
 });

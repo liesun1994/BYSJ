@@ -6,7 +6,7 @@ Ext.define("BYSJ.view.User.Edit", {
     resizable: true,
     layout: "fit",
     width: 400,
-    height: 300,
+    height: 195,
     modal: true,
     singleton: true,
     bodyPadding: "0 0 10 0",
@@ -15,7 +15,7 @@ Ext.define("BYSJ.view.User.Edit", {
    initComponent: function () {
         var me = this;
         me.form = Ext.create(Ext.form.Panel, {
-            border: false, bodyPadding: 5, height: 300,
+            border: false, bodyPadding: 5, 
             bodyStyle: "background:#DFE9F6",
             trackResetOnLoad: true,
             fieldDefaults: {
@@ -38,14 +38,6 @@ Ext.define("BYSJ.view.User.Edit", {
         });
       
         me.items = [me.form];
-        /*me.on({
-            afterLayout: function () {
-                me = this;
-                code = me.form.getForm().findField('doctype').getValue();
-                syscodeCombo.proxy.extraParams.code = code;
-                syscodeCombo.load();
-            }
-        });*/
         me.callParent(arguments);
     },
 
@@ -63,7 +55,7 @@ Ext.define("BYSJ.view.User.Edit", {
                 //waitTitle: "正在保存",
                 success: function (form, action) {
                     var me = this;
-                    Ext.widget("workPanel").down("gridpanel").getStore().load();
+                     Ext.getCmp("workPanel").down("gridpanel").getStore().load();
                     me.close()
                 },
                 failure: function(){

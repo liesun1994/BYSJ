@@ -1,5 +1,5 @@
 Ext.define('BYSJ.view.Car.List', {
-	title: "用户管理",
+	title: "车辆信息管理",
     extend: 'Ext.grid.Panel',
     alias: 'widget.carlistview',
     layout: "fit",

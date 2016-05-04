@@ -20,4 +20,24 @@ Ext.define('BYSJ.controller.Changeinfo', {
         });
     }
 
+onEditUser: function () {
+       var me = this,
+        list = Ext.getCmp("workPanel").down("gridpanel"),
+        rs = list.getSelectionModel().getLastSelected();
+        if (rs) {
+            var win = BYSJ.view.User.Edit;
+            win.form.getForm().url = "php/User/updateUser.php";
+            win.setTitle("编辑用户信息");
+            win.form.load({
+                url: "php/User/getUserById.php",
+                params: { user_id: rs.data.user_id },
+                success: function (form, action) {
+                    this.show();
+                },
+                failure: BYSJ.FormSubmitFailure,
+                scope: win
+            });
+        }
+    },
+
 });

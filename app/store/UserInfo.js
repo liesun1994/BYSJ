@@ -1,4 +1,4 @@
-Ext.define("BYSJ.store.User", {
+Ext.define("BYSJ.store.UserInfo", {
     extend: 'Ext.data.Store',
     model: 'BYSJ.model.User',
     batchActions: false,
@@ -8,15 +8,11 @@ Ext.define("BYSJ.store.User", {
     pageSize: 20,       //设置从数据库每次分页数据大小 20条
     proxy: {
         type: "ajax",
-        url: 'php/User/getUserList.php',
-        /*extraParams: {
-            username: CSEWebManager.Userinfo.Username
-        },*/
+        url: 'php/User/getUserById.php',
         reader: {
             type: 'json',
             root: "data",
-            messageProper 
-            ty: "Msg"
+            messageProperty: "Msg"
         }
     }
     /*autoLoad: true,
@@ -33,26 +29,4 @@ Ext.define("BYSJ.store.User", {
 
 
 
-/*
- Ext.define("BYSJ.store.User", {
-    extend: 'Ext.data.Store',
-    model: 'BYSJ.model.User',
-    batchActions: false,
-    remoteFilter: true,
-    remoteSort: true,
-    autoLoad: false,
-    proxy: {
-        type: "ajax",
-        url: '../Document/GetPageListByUser',
-        extraParams: {
-            username: CSEWebManager.Userinfo.Username
-        },
-        reader: {
-            type: 'json',
-            root: "data",
-            messageProperty: "Msg"
-        }
-    }
-})
 
- * */

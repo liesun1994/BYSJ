@@ -10,7 +10,10 @@ Ext.define('BYSJ.model.Emergency',{
        	"longitude",
        	"latitude",
        	"status",
-       	"emergency_time"
+       	"emergency_time",
+       	"handler_name",
+       	"handler_tel",
+       	"handler_text"
     ],
     idProperty: ["emergency_id"]
 });

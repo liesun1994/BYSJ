@@ -12,8 +12,8 @@ Ext.define('BYSJ.view.Emergency.List', {
             xtype: "pagingtoolbar",
            displayInfo: true, store: me.store,
 	        items: [
-	         	{ iconCls: "show", scope: me, text: '查看报警信息', id: "btnShow", disabled: false },
-	            { iconCls: "delete", scope: me, text: '删除报警信息', id: "btnDelete", disabled: false },
+	         	{ iconCls: "show", scope: me, text: '处理报警信息', id: "buttonEmShow", disabled: true },
+	            { iconCls: "delete", scope: me, text: '删除报警信息', id: "buttonEmDelete", disabled: true },
 	        ]
         },
         me.columns=[

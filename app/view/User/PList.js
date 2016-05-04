@@ -2,6 +2,7 @@ Ext.define('BYSJ.view.User.PList', {
 	title: "警员管理",
     extend: 'Ext.grid.Panel',
     alias: 'widget.policelistview',
+    id:'piliceView',
     layout: "fit",
     store: "Police",
 	selType: "checkboxmodel",

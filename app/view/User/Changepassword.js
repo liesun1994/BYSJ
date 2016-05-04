@@ -33,29 +33,32 @@ Ext.define('BYSJ.view.User.Changepassword', {
     },
 
     onReset: function () {
+    	//alert(BYSJ.UserInfo.user_name);
+    	//alert('123');
+      	//alert(''+session.getAttribute(("user_name"));
         var me = this;
         me.form.getForm().reset();
     },
 
    onSave: function () {
-      /*   var me = this,
+         var me = this,
             f = me.form.getForm();
         if (f.isValid()) {
-            var username = CSEWebManager.Userinfo.Username;
+        	var user_name=BYSJ.UserInfo.user_name;
             var oldpassword = f.findField('oldpassword').getValue();
             var newpassword = f.findField('newpassword').getValue();
             var renewpassword = f.findField('renewpassword').getValue();
             if (newpassword == renewpassword) {
                 Ext.Ajax.request({
-                    params: { username: username,oldpassword:oldpassword,newpassword:newpassword },
-                    url: '/Users/ChangePassword',
+                    params: { user_name: user_name,oldpwd:oldpassword,newpwd:newpassword },
+                    url: 'php/User/updateUserpwd.php',
                     scripts: true,
                     scope: me,
                     success: function (response, opt) {
                         var obj = Ext.JSON.decode(response.responseText);
                         if (obj) {
                             if (obj.success) {
-                                Ext.Msg.alert("提示信息", "重置密码成功");
+                                Ext.Msg.alert("提示信息", "修改密码成功");
                                 return;
                             } else {
                                 Ext.Msg.alert("错误", obj.msg);
@@ -70,7 +73,7 @@ Ext.define('BYSJ.view.User.Changepassword', {
                 Ext.Msg.alert("错误", "两次输入新密码不一致！" );
             }
             
-        }*/
+        }
     }
 
 });

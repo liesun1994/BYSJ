@@ -7,7 +7,7 @@ Ext.define('MAP.view.Viewport', {
         me.header = Ext.widget("toolbar",{
             height: 53, region: 'north',
             items: [
-                { xtype: 'component', cls: 'logo', html: '110报警系统分配后台' },
+                { xtype: 'component', cls: 'logo', html: '110警务调度后台' },
                 "->",
                 { iconCls: "logout", tooltip: "退出", scale: "large",
                     handler: function () {
